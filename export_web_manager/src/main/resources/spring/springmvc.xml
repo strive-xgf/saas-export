@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--springmvc是web层（Controller处理请求）  UserController  @Controller -->
+    <!--1.扫描Controller所在包-->
+    <context:component-scan base-package="com.xgf.web"/>
+
+    <!--2. 配置的视图解析器对象，success  路径/WEB-INF/pages/success.jsp -->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--3. 配置文件 - 过滤静态资源  前面的前端控制器拦截所有，静态css、js这些也都拦截
+            配置使.js .css img这些静态文件不被拦截，保证静态文件都不拦截
+             用过mvc标签进行放行，这些目录下文件都不拦截      -->
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/images/" mapping="/images/**" />
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/fonts/" mapping="/fonts/**" />
+
+    <!-- 4. 开启注解驱动，开启SpringMVC的注解的支持 @RequestMapping @RequestBody @ResponseBody这些注解需要使用 -->
+    <mvc:annotation-driven/>
+</beans>
+
