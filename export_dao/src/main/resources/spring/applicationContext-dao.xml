@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!-- dao子工程交给Spirng来管理，创建一个对应的applicationContext-dao.xml -->
+
+    <!-- 引入c3p0的属性文件(里面是连接数据库四大信息键值对)，在配置中通过占位使用 -->
+    <context:property-placeholder location="classpath:properties/c3p0.properties" />
+
+    <!-- 连接数据库的四大基本信息-->
+    <!-- 数据库连接池c3p0 -->
+    <!-- 用c3p0数据源配置连接池，里面有连接池  ComboPooledDataSource数据库连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 连接池4大组件 -->
+        <property name="driverClass" value="${c3p0.driverClass}"/>
+        <property name="jdbcUrl" value="${c3p0.jdbcUrl}"/>
+        <property name="user" value="${c3p0.user}"/>
+        <property name="password" value="${c3p0.password}"/>
+
+        <!--初始化连接数  取值要在minPoolSize和maxPoolSize之间（可包含，闭区间） 默认值：3 -->
+        <property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+        <!-- 最大连接数 （连接池中的连接数不能超过maxPoolSize最大连接数） 默认值：15-->
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <!--最小连接数  默认值：3  -->
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <!-- c3p0连接池中数据连接不够时（无空闲连接可用）,一次增长的个数（增长不能超过maxPoolSize最大连接个数） 默认值：3 -->
+        <property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
+        <!-- 连接的最大空闲时间，如果超过这个时间还没有被使用，就断开这个连接（设置为0或负数，就永远都不会被断开） 单位：秒  默认值 ：0 -->
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+
+        <!-- 从数据库获取新连接失败后重复尝试的次数。小于等于0表示无限次  默认值: 30-->
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <!-- 两次连接的中间间隔时间（重新尝试的时间间隔）  单位：毫秒  默认值：1000 -->
+        <property name="acquireRetryDelay" value="${c3p0.acquireRetryDelay}"/>
+        <!-- 连接关闭时，是否将所有未提交的操作进行事务回滚  默认值：false -->
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <!-- 当连接池用完时,客户端调用getConnection()后等待获取新连接的时间  单位：毫秒  默认值：0
+                如果值设为 0，将无限期等待，直到有空闲连接。  否则按照设置的值，超时将抛出SQLException异常
+                时间设置过小时会出现连接超时，这样会抛出SQLException异常，设置时间时需要小心，按照实际情况设置适当的值-->
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <!-- 每隔多少秒检查所有连接池中的空闲连接  单位：秒   默认值：0 -->
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+
+        <!-- 配置PreparedStatement缓存，设置连接池为数据源缓存的PreparedStatement的总数
+                为0的时候不缓存，同时maxStatementsPerConnection的配置无效。
+               由于PreparedStatement属于单个Connection,所以这个数量应该根据应用中平均连接数乘以每个连接的平均PreparedStatement来计算-->
+        <property name="maxStatements" value="${c3p0.maxStatements}"/>
+
+    </bean>
+
+
+    <!-- 获取sqlSessionFactory-->
+    <bean id="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 给整个包下的所有文件起别名，就是类名的首字母小写 com.xgf.domain.Person 简化成 person-->
+        <property name="typeAliasesPackage" value="com.xgf.domain"/>
+    </bean>
+    <!-- 配置映射文件扫描器  ： IPersonDao.xml和IPersonDao.java-->
+    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描dao接口和映射xml编译后的类路径 -->
+        <property name="basePackage" value="com.xgf.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+</beans>
