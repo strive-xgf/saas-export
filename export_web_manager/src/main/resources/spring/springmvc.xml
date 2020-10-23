@@ -31,5 +31,24 @@
 
     <!-- 4. 开启注解驱动，开启SpringMVC的注解的支持 @RequestMapping @RequestBody @ResponseBody这些注解需要使用 -->
     <mvc:annotation-driven/>
+
+    <!-- 5. 配置类型转换器  -->
+    <!-- 创建类型转换器对象 -->
+    <bean id="stringToDateConverter" class="com.xgf.web.converter.StringToDateConverter"/>
+    <!-- 把转换器对象放入SpringMVC转换器工厂中 -->
+    <bean id="conversionServiceFactory" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <!-- 引入日期转换器对象（上面创建的） -->
+                <ref bean="stringToDateConverter"/>
+                <!-- 或者直接将转换器类写到这里面 -->
+                <!--<bean id="stringToDateConverter" class="com.xgf.web.converter.StringToDateConverter"/>-->
+            </set>
+        </property>
+    </bean>
+
+    <!--6. 把转换器工厂放入到注解驱动，转换器才会生效 -->
+    <mvc:annotation-driven conversion-service="conversionServiceFactory" />
+
 </beans>
 
