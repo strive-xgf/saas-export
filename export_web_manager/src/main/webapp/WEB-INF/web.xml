@@ -5,6 +5,7 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+
   <!--这些配置是有顺序的 context-param参数，后面是filter过滤器，然后是listener监听器，然后是servlet前端控制器 -->
 
   <!--1. spring监听器: 读取applicationContext.xml配置文件
@@ -57,8 +58,16 @@
     <!-- 要和上面的前端控制器命名相同 -->
     <servlet-name>DispatcherServlet</servlet-name>
     <!-- *.do 表示所有后缀为do的请求 -->
-    <url-pattern>*.do</url-pattern>
+    <!--<url-pattern>*.do</url-pattern>-->
+    <!-- /表示拦截所有请求进行请求转发 -->
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+
+  <!-- 设置打开主页为起始页 -->
+  <welcome-file-list>
+    <welcome-file>home/toMain</welcome-file>
+  </welcome-file-list>
 
 </web-app>
 

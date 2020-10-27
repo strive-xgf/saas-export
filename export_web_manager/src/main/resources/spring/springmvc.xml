@@ -25,9 +25,10 @@
             配置使.js .css img这些静态文件不被拦截，保证静态文件都不拦截
              用过mvc标签进行放行，这些目录下文件都不拦截      -->
     <mvc:resources location="/css/" mapping="/css/**" />
-    <mvc:resources location="/images/" mapping="/images/**" />
+    <mvc:resources location="/img/" mapping="/img/**" />
     <mvc:resources location="/js/" mapping="/js/**" />
     <mvc:resources location="/fonts/" mapping="/fonts/**" />
+    <mvc:resources location="/plugins/" mapping="/plugins/**" />
 
     <!-- 4. 开启注解驱动，开启SpringMVC的注解的支持 @RequestMapping @RequestBody @ResponseBody这些注解需要使用 -->
     <mvc:annotation-driven/>
