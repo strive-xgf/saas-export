@@ -7,8 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+public interface ICompanyDao{
+
+    List<Company> findAll();
+}
+
+/*@Repository
 public interface ICompanyDao {
     //查询所有的公司记录
     //select * from ss_company
     List<Company> findAll();
-}
+}*/
