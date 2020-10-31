@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<% pageContext.setAttribute("path",request.getContextPath());%>
 <header class="main-header">
     <a href="all-admin-index.html" class="logo">
-        <span class="logo-mini"><img src="../img/logo.png"></span>
+        <span class="logo-mini"><img src="${path}/img/logo.png"></span>
         <span class="logo-lg">
-                    <img src="../img/export.png">
+                    <img src="${path}/img/export.png">
                     <i> SaaS外贸进出口平台</i>
                 </span>
     </a>
@@ -26,7 +27,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                            <img src="${path}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             系统消息
@@ -38,7 +39,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                            <img src="${path}/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             团队消息
@@ -50,7 +51,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                            <img src="${path}/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Developers
@@ -62,7 +63,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                            <img src="${path}/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Sales Department
@@ -74,7 +75,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                            <img src="${path}/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Reviewers
@@ -211,13 +212,13 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <img src="${path}/img/user2-160x160.jpg" class="user-image" alt="User Image">
                         <span class="hidden-xs"> ${sessionScope.user.userName}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="${path}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
                                 ${sessionScope.user.userName}

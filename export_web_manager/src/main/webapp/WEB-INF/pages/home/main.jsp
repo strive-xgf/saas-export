@@ -23,23 +23,17 @@
     <jsp:include page="left_menu.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
     <!-- 内容区域 -->
+<%--src="home.do"--%>
 
-    <body>
-    <a href="http://www.baidu.com" target="f1">显示百度主页</a>
-    <a href="http://www.iqiyi.com" target="f2">显示爱奇艺主页</a>
-
-    <iframe name="f1" width="30%" height="50%" style="background-color: blue" ></iframe>
-    <iframe name="f2" width="30%" height="50%" style="background-color: green" ></iframe>
-    </body>
-
-
-
+    <%-- 增删改的时候a标签的target跳转到iframe显示在这个iframe上面 --%>
     <div class="content-wrapper">
         <iframe id="iframe" name="iframe"
                 style="overflow:visible;"
                 scrolling="auto"
                 frameborder="no" height="100%" width="100%"
-                src="home.do"></iframe>
+                src="home">
+
+        </iframe>
     </div>
     <!-- 内容区域 /-->
 

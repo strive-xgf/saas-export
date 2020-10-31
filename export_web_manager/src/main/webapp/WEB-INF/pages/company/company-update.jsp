@@ -20,13 +20,13 @@
     <!-- 内容头部 -->
     <section class="content-header">
         <h1>
-            订单管理
-            <small>订单表单</small>
+            企业管理
+            <small>企业表单</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="all-order-manage-list.html">订单管理</a></li>
-            <li class="active">订单表单</li>
+            <li><a href="all-order-manage-list.html">企业管理</a></li>
+            <li class="active">企业表单</li>
         </ol>
     </section>
     <!-- 内容头部 /-->
@@ -35,10 +35,10 @@
 
     <section class="content">
 
-        <!--订单信息-->
+        <!--企业信息-->
         <div class="panel panel-default">
-            <div class="panel-heading">订单信息</div>
-            <form id="editForm" action="/company/edit.do" method="post">
+            <div class="panel-heading">企业信息</div>
+            <form id="editForm" action="${path}/company/update" method="post">
                 <input type="hidden" name="id" value="${company.id}">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">企业名称</div>
@@ -101,7 +101,7 @@
                 </div>
             </form>
         </div>
-        <!--订单信息/-->
+        <!--企业信息/-->
 
         <!--工具栏-->
         <div class="box-tools text-center">

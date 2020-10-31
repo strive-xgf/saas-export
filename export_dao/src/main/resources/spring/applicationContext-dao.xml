@@ -61,6 +61,28 @@
         <property name="dataSource" ref="dataSource"/>
         <!-- 给整个包下的所有文件起别名，就是类名的首字母小写 com.xgf.domain.Person 简化成 person-->
         <property name="typeAliasesPackage" value="com.xgf.domain"/>
+
+        <!-- PageHelper配置：配置PageInterceptor插件拦截器,实现参数合理化（越界判断） -->
+        <!-- 参数合理化： 通过pagehelper的拦截器PageInterceptor实现
+            比如当前页currPage <= 1，则按currPage = 1进行查询
+            如果当前页currPage > totalPage(总页数) ，则按currPage = totalPage(最后一页)查询
+         -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <!-- pageNum<=0 时会查询第一页 -->
+                        <!-- 指定数据库 -->
+                        <value>
+                            reasonable=true
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
     </bean>
     <!-- 配置映射文件扫描器  ： IPersonDao.xml和IPersonDao.java-->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

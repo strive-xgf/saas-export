@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -15,18 +16,17 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
 </head>
-<body>
 <div id="frameContent">
     <!-- 内容头部 -->
     <section class="content-header" class="content-wrapper" style="margin-left:0px;">
         <h1>
-            订单管理
-            <small>订单表单</small>
+            企业管理
+            <small>添加企业表单</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="all-order-manage-list.html">订单管理</a></li>
-            <li class="active">订单表单</li>
+            <li><a href="all-order-manage-list.html">添加企业管理</a></li>
+            <li class="active">企业表单</li>
         </ol>
     </section>
     <!-- 内容头部 /-->
@@ -34,10 +34,10 @@
     <!-- 正文区域 -->
     <section class="content">
 
-        <!--订单信息-->
+        <!--增加公司信息-->
         <div class="panel panel-default">
-            <div class="panel-heading">订单信息</div>
-            <form id="editForm" action="${path}/company/add.do" method="post">
+            <div class="panel-heading">企业信息</div>
+            <form id="editForm" action="${path}/company/add" method="post">
                 <input type="hidden" name="id" value="${company.id}">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">企业名称</div>
@@ -100,7 +100,7 @@
                 </div>
             </form>
         </div>
-        <!--订单信息/-->
+        <!--添加公司信息/-->
 
         <!--工具栏-->
         <div class="box-tools text-center">
