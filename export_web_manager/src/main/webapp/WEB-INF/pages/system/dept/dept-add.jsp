@@ -6,15 +6,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
+    <title>Saas-Export 增加部门</title>
 </head>
 <body>
     <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
         <section class="content-header">
             <h1>
                 系统管理
-                <small>部门管理</small>
+                <small>部门管理 - 增加</small>
             </h1>
+
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
             </ol>
@@ -28,8 +29,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <form id="editForm" action="/system/dept/edit.do" method="post">
-                            <input type="hidden" name="id" value="${dept.id}">
+                        <form id="editForm" action="${path}/system/dept/add" method="post">
                             <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
                                     <div class="col-md-2 title">部门名称</div>
@@ -38,18 +38,17 @@
                                     </div>
                                     <div class="col-md-2 title">上级部门</div>
                                     <div class="col-md-10 data line-height36">
-                                        <select class="form-control" name="parent.id">
-                                            <option value="">请选择</option>
-                                            <c:forEach items="${deptList}" var="item">
-                                                <option ${dept.parent.id == item.id ?'selected':''} value="${item.id}">${item.deptName}</option>
+                                        <select class="form-control" name="parentId">
+                                            <c:forEach items="${list}" var="item">
+                                                <option value="${item.deptId}">${item.deptName}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                     <div class="col-md-2 title">状态</div>
                                     <div class="col-md-10 data">
                                         <div class="form-group form-inline">
-                                            <div class="radio"><label><input type="radio" ${dept.state==0?'checked':''} name="state" value="0">停用</label></div>
-                                            <div class="radio"><label><input type="radio" ${dept.state==1?'checked':''} name="state" value="1">启用</label></div>
+                                            <div class="radio"><label><input type="radio"  checked="checked" name="state" value="0">停用</label></div>
+                                            <div class="radio"><label><input type="radio"  name="state" value="1">启用</label></div>
                                         </div>
                                     </div>
                                     <div class="col-md-2 title"></div>
