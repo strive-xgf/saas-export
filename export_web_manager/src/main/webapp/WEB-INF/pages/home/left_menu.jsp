@@ -60,7 +60,7 @@
                     </li>
 
                     <li id="module-manager">
-                        <a href="${path}/system/module/list" onclick="setSidebarActive(this)" target="iframe">
+                        <a href="${path}/system/module/toList" onclick="setSidebarActive(this)" target="iframe">
                             <i class="fa fa-circle-o"></i>模块管理
                         </a>
                     </li>

@@ -10,17 +10,23 @@ public class Module {
     private String  parentId;
     //上级模块名称
     private String  parentName;
-
     private long  layerNum;
     private long  isLeaf;
     private String  ico;
+    //权限标识 - 描述
     private String  cpermission;
+    //url地址链接
     private String  curl;
+    //模块类型 - 主菜单、二级菜单、按钮
     private long  ctype;
+    //状态 - 启用/停用
     private long  state;
+    //从属关系  - sass内部菜单 / 租用企业菜单
     private String  belong;
+    //排序号（分页的时候显示顺序）
     private String  cwhich;
     private long  quoteNum;
+    //备注信息
     private String  remark;
     private long  orderNo;
 

@@ -1,9 +1,8 @@
-package com.xgf.service.role;
+package com.xgf.service.system.role;
 
 import com.github.pagehelper.PageInfo;
 
 import com.xgf.domain.system.role.Role;
-import com.xgf.service.system.role.IRoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

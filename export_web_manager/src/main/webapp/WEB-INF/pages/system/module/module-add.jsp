@@ -6,24 +6,25 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
+    <title>SaaS-Export 模块添加</title>
 </head>
 <body>
     <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
         <section class="content-header">
             <h1>
                 系统管理
-                <small>部门管理</small>
+                <small>模块管理 - 添加</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
             </ol>
         </section>
+
         <section class="content">
             <div class="panel panel-default">
                 <div class="panel-heading">用户信息</div>
-                <form id="editForm" action="/system/module/edit.do" method="post">
-                    <input type="hidden" name="id" value="${module.id}">
+                <form id="editForm" action="${path}/system/module/add" method="post">
+
                     <input type="hidden" id="parentName" name="parentName" value="${module.parentName}">
                     <div class="row data-type" style="margin: 0px">
                         <div class="col-md-2 title">模块名</div>
@@ -34,9 +35,9 @@
                         <div class="col-md-2 title">上级模块</div>
                         <div class="col-md-4 data">
                             <select class="form-control" onchange="document.getElementById('parentName').value=this.options[this.selectedIndex].text" name="parentId">
-                                <option value="">请选择</option>
-                                <c:forEach items="${menus}" var="item">
-                                    <option ${module.parentId == item.id ?'selected':''} value="${item.id}">${item.name}</option>
+                                <option value="">成为顶级模块</option>
+                                <c:forEach items="${list}" var="item">
+                                    <option value="${item.moduleId}">${item.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -78,7 +79,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2 title">排序号</div>
+                        <div class="col-md-2 title">分页排序号（数字）</div>
                         <div class="col-md-4 data">
                             <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${module.orderNo}">
                         </div>

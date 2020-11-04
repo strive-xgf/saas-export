@@ -6,14 +6,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
+    <title>SaaS-Export 模块更新</title>
 </head>
 <body>
     <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
         <section class="content-header">
             <h1>
                 系统管理
-                <small>部门管理</small>
+                <small>模块管理 - 更新</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -22,8 +22,9 @@
         <section class="content">
             <div class="panel panel-default">
                 <div class="panel-heading">用户信息</div>
-                <form id="editForm" action="/system/module/edit.do" method="post">
-                    <input type="hidden" name="id" value="${module.id}">
+                <form id="editForm" action="${path}/system/module/update" method="post">
+                    <%--隐藏域，模块id，更新传递值到controller--%>
+                    <input type="hidden" name="moduleId" value="${module.moduleId}">
                     <input type="hidden" id="parentName" name="parentName" value="${module.parentName}">
                     <div class="row data-type" style="margin: 0px">
                         <div class="col-md-2 title">模块名</div>
@@ -34,9 +35,21 @@
                         <div class="col-md-2 title">上级模块</div>
                         <div class="col-md-4 data">
                             <select class="form-control" onchange="document.getElementById('parentName').value=this.options[this.selectedIndex].text" name="parentId">
-                                <option value="">请选择</option>
-                                <c:forEach items="${menus}" var="item">
-                                    <option ${module.parentId == item.id ?'selected':''} value="${item.id}">${item.name}</option>
+                                <%-- 成为顶级模块向后台传空字符串空值 --%>
+                                <option value="">自己成为顶级模块</option>
+                                <c:forEach  items="${modules}" var="item">
+                                    <%-- 当前模块不能选择自己作为上级模块 --%>
+                                    <c:if test="${module.moduleId != item.moduleId }">
+                                        <%--第一种写法--%>
+                                        <%--<option ${module.moduleId == item.moduleId ?'selected':''}  value="${item.moduleId}">${item.name}</option>--%>
+                                        <option
+                                             <%-- 下拉框给当前模块的上级模块添加选中 状态，当前模块数据有一个parentId，集合的哪个模块的moduleId跟我相同，则生成selected --%>
+                                            <c:if test="${module.parentId == item.moduleId }">
+                                                selected
+                                            </c:if>
+                                            value="${item.moduleId}">${item.name}
+                                        </option>
+                                    </c:if>
                                 </c:forEach>
                             </select>
                         </div>
