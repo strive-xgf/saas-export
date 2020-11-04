@@ -11,6 +11,7 @@
                 <img src="${path}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
+                <%--登录用户 登录公司 --%>
                 <p> ${sessionScope.user.userName}</p>
                 <a href="#">${sessionScope.user.companyName}</a>
             </div>
@@ -53,12 +54,13 @@
                 </a>
                 <ul class="treeview-menu">
                     <li id="company-manager">
-                        <a href="${path}/company/toList.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="${path}/company/toList" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>企业管理
                         </a>
                     </li>
+
                     <li id="module-manager">
-                        <a href="/system/module/list.do" onclick="setSidebarActive(this)" target="iframe">
+                        <a href="${path}/system/module/list" onclick="setSidebarActive(this)" target="iframe">
                             <i class="fa fa-circle-o"></i>模块管理
                         </a>
                     </li>
@@ -74,42 +76,42 @@
                 </a>
                 <ul class="treeview-menu">
                     <li id="cargo-contract">
-                        <a href="cargo/contract/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="cargo/contract/list" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>购销合同
                         </a>
                     </li>
                     <li id="cargo-out">
-                        <a href="/cargo/contract/print.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/contract/print" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>出货表
                         </a>
                     </li>
                     <li id="cargo-contractlist">
-                        <a href="/cargo/export/contractList.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/export/contractList" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>合同管理
                         </a>
                     </li>
                     <li id="cargo-export">
-                        <a href="/cargo/export/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/export/list" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>出口报运
                         </a>
                     </li>
                     <li id="cargo-pack">
-                        <a href="/cargo/packing/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/packing/list" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>装箱管理
                         </a>
                     </li>
                     <li id="cargo-ship">
-                        <a href="/cargo/shipping/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/shipping/list" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>委托管理
                         </a>
                     </li>
                     <li id="cargo-invoice">
-                        <a href="/cargo/invoice/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/invoice/list" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>发票管理
                         </a>
                     </li>
                     <li id="cargo-finance">
-                        <a href="/cargo/finance/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/cargo/finance/list" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>财务管理
                         </a>
                     </li>
@@ -125,17 +127,17 @@
                 </a>
                 <ul class="treeview-menu">
                     <li id="stat-factory">
-                        <a href="/stat/toCharts.do?chartsType=factory" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/stat/toCharts?chartsType=factory" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>厂家销量统计
                         </a>
                     </li>
                     <li id="stat-sell">
-                        <a href="/stat/toCharts.do?chartsType=sell" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/stat/toCharts?chartsType=sell" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>产品销量排行
                         </a>
                     </li>
                     <li id="stat-online">
-                        <a href="/stat/toCharts.do?chartsType=online" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="/stat/toCharts?chartsType=online" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>在线人数统计
                         </a>
                     </li>
@@ -171,23 +173,24 @@
                  </span>
                 </a>
                 <ul class="treeview-menu">
+
                     <li id="sys-dept">
-                        <a href="/system/dept/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="${path}/system/dept/toList"  onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>部门管理
                         </a>
                     </li>
                     <li id="sys-user">
-                        <a href="/system/user/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="${path}/system/user/toList" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>用户管理
                         </a>
                     </li>
                     <li id="sys-role">
-                        <a href="/system/role/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="${path}/system/role/toList" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>角色管理
                         </a>
                     </li>
                     <li id="sys-log">
-                        <a href="/system/log/list.do" onclick="setSidebarActive(this)"  target="iframe">
+                        <a href="${path}/system/log/toList" onclick="setSidebarActive(this)"  target="iframe">
                             <i class="fa fa-circle-o"></i>日志管理
                         </a>
                     </li>

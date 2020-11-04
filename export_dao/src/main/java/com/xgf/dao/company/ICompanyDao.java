@@ -24,4 +24,3 @@ public interface ICompanyDao{
     //更新company
     void update(Company company);
 }
-

@@ -8,9 +8,9 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <title>SaaS-Export - 角色列表</title>
+    <meta name="description" content="SaaS-Export - 角色管理">
+    <meta name="keywords" content="角色管理">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
@@ -21,7 +21,15 @@
         var id = getCheckId()
         if(id) {
             if(confirm("你确认要删除此条记录吗？")) {
-                location.href="/system/role/delete.do?id="+id;
+                // location.href="/system/role/delete?id="+id;      //非ajax请求
+                //使用ajax请求
+                var url= '${path}/system/role/delete?roleId='+id;
+                var fn = function(result){ //{code:200,msg:'删除成功',data:null}
+                    //弹出提示
+                    alert(result.message)
+                    window.location.reload() //重新加载
+                }
+                $.get(url,fn,'json')
             }
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
@@ -31,7 +39,7 @@
     function findModuleByRoleId(){
         var id = getCheckId();
         if(id) {
-            location.href="/system/role/roleModule.do?roleid="+id;
+            location.href="${path}/system/role/toRoleModule?roleId="+id;
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
@@ -68,7 +76,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="/system/role/toAdd.do"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${path}/system/role/toAdd"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                             <button type="button" class="btn btn-default" title="权限" onclick="findModuleByRoleId()"><i class="fa fa-users"></i> 权限</button>
@@ -98,23 +106,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page.rows}" var="o" varStatus="status">
+                    <c:forEach items="${pi.list}" var="o" varStatus="status">
                     <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
-                        <td><input type="checkbox" name="id" value="${o.id}"/></td>
+                        <td><input type="checkbox" name="roleId" value="${o.roleId}"/></td>
                         <td>${status.index+1}</td>
-                        <td>${o.id}</td>
-                        <td><a href="/system/role/toUpdate.do?id=${o.id}">${o.name}</a></td>
+                        <td>${o.roleId}</td>
+                        <td><a href="${path}/system/role/toUpdate?roleId=${o.roleId}">${o.name}</a></td>
                         <td>${o.remark}</td>
-                        <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="/system/role/toUpdate.do?id=${o.id}"'>编辑</button></th>
+                        <th class="text-center"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${path}/system/role/toUpdate?roleId=${o.roleId}"'>编辑</button></th>
                     </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
+        <%-- 分页信息 --%>
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="${ctx}/system/role/list.do" name="pageUrl"/>
+                <jsp:param value="${path}/system/role/toList" name="pageUrl"/>
             </jsp:include>
         </div>
     </div>

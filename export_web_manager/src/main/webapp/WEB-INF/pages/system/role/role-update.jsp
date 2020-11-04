@@ -6,19 +6,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
+    <title>SaaS-Export - 角色更新</title>
 </head>
 <body>
     <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
         <section class="content-header">
             <h1>
                 系统管理
-                <small>角色管理</small>
+                <small>角色管理 - 更新</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
             </ol>
         </section>
+
         <section class="content">
             <div class="box-body">
                 <div class="nav-tabs-custom">
@@ -28,8 +29,8 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <form id="editForm" action="/system/role/edit.do" method="post">
-                            <input type="hidden" name="id" value="${role.id}">
+                        <form id="editForm" action="${path}/system/role/update" method="post">
+                            <input type="hidden" name="roleId" value="${role.roleId}">
                             <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
                                     <div class="col-md-2 title">角色名</div>
