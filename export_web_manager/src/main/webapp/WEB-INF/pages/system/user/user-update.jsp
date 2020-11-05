@@ -10,9 +10,9 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <title>Saas-Export 更新用户</title>
+    <meta name="description" content="Saas-Export 更新用户">
+    <meta name="keywords" content="Saas-Export update user">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
@@ -23,11 +23,11 @@
     <section class="content-header">
         <h1>
             系统管理
-            <small>用户管理</small>
+            <small>用户管理 - 更新</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="/system/user/list.do">用户列表</a></li>
+            <li><a href="${path}/system/user/list">用户列表</a></li>
         </ol>
     </section>
     <!-- 内容头部 /-->
@@ -38,21 +38,40 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">用户信息</div>
-            <form id="editForm" action="/system/user/edit.do" method="post">
-                <input type="hidden" id="id" name="id" value="${user.id}">
-                <input type="hidden" id="deptName" name="deptName" value="${user.deptName}">
+            <form id="editForm" action="${path}/system/user/update" method="post">
+
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">用户名称</div>
                     <div class="col-md-4 data">
                         <input type="text" class="form-control" placeholder="用户名称" name="userName" value="${user.userName}">
                     </div>
-
                     <div class="col-md-2 title">所在部门</div>
                     <div class="col-md-4 data">
-                        <select class="form-control" onchange="document.getElementById('deptName').value=this.options[this.selectedIndex].text" name="deptId">
-                            <option value="">请选择</option>
-                            <c:forEach items="${deptList}" var="item">
-                                <option ${user.deptId == item.id ?'selected':''} value="${item.id}">${item.deptName}</option>
+                        <input type="hidden" id="userId" name="userId" value="${user.userId}">
+                        <input type="hidden" id="deptId" name="deptId" value="${user.deptId}">
+                        <input type="hidden" id="deptName" name="deptName" value="${user.deptName}">
+                        <input type="hidden" id="companyId" name="companyId" value="${user.companyId}">
+                        <input type="hidden" id="companyName" name="companyName" value="${user.companyName}">
+                        <script type="text/javascript">
+                            function selectDepartment() {
+                                //获取选中值的中文
+                                var select= $('#select option:selected')
+                                //将中文赋值给隐藏的输入框，最后提交到后台
+                                //alert(select.val())
+                                //alert(select.html())
+                                $('#deptName').val(select.html())
+                                $('#deptId').val(select.val())
+                            }
+
+                        </script>
+                        <select id="select" class="form-control" onchange="selectDepartment()"  >
+                            <c:forEach items="${depts}" var="item">
+                                <option
+                                        <%--当前用户的deptId与查询的部门集合中的元素的deptId相等，则应该选中--%>
+                                        <c:if test="${user.deptId==item.deptId}" >
+                                            selected
+                                        </c:if>
+                                        value="${item.deptId}">${item.deptName}</option>
                             </c:forEach>
                         </select>
                     </div>

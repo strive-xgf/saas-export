@@ -5,6 +5,7 @@ import java.util.Date;
 //用户表
 public class User {
     private String userId;
+    //所在部门
     private String deptId;
     private String email;
     private String userName;

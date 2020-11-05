@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xgf.dao.system.user.IUserDao">
+
+    <!-- 数据库表字段和类属性映射 -->
+    <resultMap id="userMap" type="user">
+        <id column="user_id"        property="userId"/>
+        <result column="dept_id"    property="deptId"/>
+        <result column="email"      property="email"/>
+        <result column="user_name"  property="userName"/>
+        <result column="station"    property="station"/>
+        <result column="password"   property="password"/>
+        <result column="state"      property="state"/>
+        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="dept_name"  property="deptName"/>
+        <result column="manager_id" property="managerId"/>
+        <result column="gender"     property="gender"/>
+        <result column="telephone"  property="telephone"/>
+        <result column="birthday"   property="birthday"/>
+        <result column="degree"     property="degree"/>
+        <result column="salary"     property="salary"/>
+        <result column="join_date"  property="joinDate"/>
+        <result column="order_no"   property="orderNo"/>
+        <result column="create_by"  property="createBy"/>
+        <result column="create_dempt" property="createDempt"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by"  property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark"     property="remark"/>
+    </resultMap>
+
+    <!-- 查找所有用户，按照更新时间排序 -->
+    <select id="findAll" parameterType="string" resultMap="userMap">
+        select * from pe_user where company_id = #{companyId} order by update_time desc
+    </select>
+
+    <!-- 添加一个用户user -->
+    <insert id="save" parameterType="user">
+      insert into pe_user
+        (
+            user_id          ,
+            dept_id          ,
+            email            ,
+            user_name        ,
+            station          ,
+            password         ,
+            state            ,
+            company_id       ,
+            company_name     ,
+            dept_name        ,
+            manager_id       ,
+            gender           ,
+            telephone        ,
+            birthday         ,
+            degree           ,
+            salary           ,
+            join_date        ,
+            order_no         ,
+            create_by        ,
+            create_dempt     ,
+            create_time      ,
+            update_by        ,
+            update_time      ,
+            remark
+        )
+        values(
+            #{userId        },
+            #{deptId        },
+            #{email         },
+            #{userName      },
+            #{station       },
+            #{password      },
+            #{state         },
+            #{companyId     },
+            #{companyName   },
+            #{deptName      },
+            #{managerId     },
+            #{gender        },
+            #{telephone     },
+            #{birthday      },
+            #{degree        },
+            #{salary        },
+            #{joinDate      },
+            #{orderNo       },
+            #{createBy      },
+            #{createDempt   },
+            #{createTime    },
+            #{updateBy      },
+            #{updateTime    },
+            #{remark        }
+        )
+    </insert>
+
+    <!-- 通过id查找用户 -->
+    <select id="findById" parameterType="string" resultMap="userMap">
+        select * from pe_user where user_id = #{userId}
+    </select>
+
+    <!-- 更新user信息 -->
+    <update id="update" parameterType="user">
+        update  pe_user set
+                dept_id       =         #{deptId        },
+                email         =         #{email         },
+                user_name     =         #{userName      },
+                station       =         #{station       },
+                password      =         #{password      },
+                state         =         #{state         },
+                company_id    =         #{companyId     },
+                company_name  =         #{companyName   },
+                dept_name     =         #{deptName      },
+                manager_id    =         #{managerId     },
+                gender        =         #{gender        },
+                telephone     =         #{telephone     },
+                birthday      =         #{birthday      },
+                degree        =         #{degree        },
+                salary        =         #{salary        },
+                join_date     =         #{joinDate      },
+                order_no      =         #{orderNo       },
+                create_by     =         #{createBy      },
+                create_dempt  =         #{createDempt   },
+                create_time   =         #{createTime    },
+                update_by     =         #{updateBy      },
+                update_time   =         #{updateTime    },
+                remark        =         #{remark        }
+        where user_id   =   #{userId        }
+    </update>
+
+    <!-- 通过id删除user -->
+    <delete id="deleteById" parameterType="string">
+    delete  from pe_user where user_id = #{userId}
+</delete>
+</mapper>

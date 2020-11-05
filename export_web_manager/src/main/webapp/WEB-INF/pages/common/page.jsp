@@ -21,7 +21,10 @@
             <li><a href="javascript:goPage(${pi.prePage})">上一页</a></li>
         </c:if>
 
-        <c:forEach begin="1" end="${pi.pages}" var="i">
+
+        <%--<c:forEach begin="1" end="${pi.pages}" var="i">--%>
+        <%-- 不显示所有的页数，只显示当前页的前五页和当前页的后五页（判断是否越界） --%>
+        <c:forEach begin="${pi.pageNum-5 <= 0 ? 1:pi.pageNum-5 }" end="${pi.pageNum+5>pi.pages?pi.pages:pi.pageNum+5}" var="i">
             <%-- 循环显示页数，如果页数是当前页，就active的css效果，高亮，点击页数就跳转goPage(i)指定页面 --%>
             <li class="paginate_button ${pi.pageNum==i ? 'active':''}"><a href="javascript:goPage(${i})">${i}</a></li>
         </c:forEach>
