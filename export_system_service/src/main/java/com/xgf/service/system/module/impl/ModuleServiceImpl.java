@@ -7,6 +7,7 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import com.xgf.dao.system.module.IModuleDao;
 import com.xgf.domain.system.module.Module;
+import com.xgf.domain.system.user.User;
 import com.xgf.service.system.module.IModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,28 +66,53 @@ public class ModuleServiceImpl implements IModuleService {
         }
     }
 
+
+
     @Override
     public List<Module> findAllModules() {
         return iModuleDao.findAll();
     }
 
-   /* @Override
+    @Override
     public List<Module> findModuleByRoleId(String roleId) {
-
         return iModuleDao.findByRoleId(roleId);
     }
 
+    //更新角色的模块信息
     @Override
     public void updateRoleModule(String roleId, String moduleIds) {
-        //先做删除 指定角色在中间表中的记录
+        //先做删除，删除角色在中间表（角色模块表）中的记录
         iModuleDao.deleteRoleModule(roleId);
-        //moduleIds 202,203
-        String[] mids = moduleIds.split(",");
-        if (mids.length > 0) { //判断，再操作
-            //再作添加
-            for (String mid : mids) {
-                iModuleDao.saveRoleModule(roleId, mid);
+        // zTree获取所有的模块id，按,逗号分开  moduleIds 202,203
+        //判断该角色权限是否清空（该角色还有模块的情况，否则会抛出InvocationTargetException异常）
+        if(moduleIds!=null && moduleIds != ""){
+            String[] mids = moduleIds.split(",");
+            //更新角色模块
+            if (mids.length > 0) { //判断选择模块权限是否>0，再操作
+                //再作添加，将模块赋予给角色（角色模块表添加记录）
+                for (String mid : mids) {
+                    iModuleDao.saveRoleModule(roleId, mid);
+                }
             }
+        }else{
+            System.out.println("updateRoleModule 该用户没有任何权限了");
         }
+    }
+
+/*    //查找用户的模块权限信息
+    @Override
+    public List<Module> findModulesByUser(User user) {
+        //degree ==0 平台管理员 只能看 Sass菜单
+        //degree ==1 企业管理员 只能看 Sass菜单以外
+        //degree ==其他 用户员 根据RBAC表查询
+        //给一个用户数据到service，service自己判断
+        if (user.getDegree() == 0) {//平台管理员
+            return iModuleDao.findByBelong("0");
+        } else if (user.getDegree() == 1) {//企业管理员
+            return iModuleDao.findByBelong("1");
+        } else {
+            return iModuleDao.findByUserId(user.getUserId());
+        }
+
     }*/
 }

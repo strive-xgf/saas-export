@@ -16,4 +16,7 @@ public interface IUserDao {
     void update(User user);
     //通过id删除user
     void deleteById(String userId);
+
+
+    User finByEmail(String email);
 }

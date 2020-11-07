@@ -63,27 +63,44 @@ public class TestModuleService {
         l.info("删除模块结果："+flag);
     }
 
-    /*@Test
+
+    //测试查找所有的模块
+    @Test
     public void test05(){
 
-        List<Module> list = iModuleService.findAllModules();
-        l.info("pi = "+list);
+        List<Module> moduleList = iModuleService.findAllModules();
+        l.info("模块数量"+ moduleList.size() +"moduleList = "+moduleList);
     }
 
-    //角色B的权限，正确的是三个
+    //测试通过角色id查询角色的权限
     @Test
     public void test06(){
 
-        List<Module> myList = iModuleService.findModuleByRoleId("4028a1cd4ee2d9d6014ee2df4c6a0010");
-        l.info("myList = "+myList);
+        List<Module> myList = iModuleService.findModuleByRoleId("ac9b2814-51bc-40db-8628-6cb20b77e5e9");
+        l.info("模块数量： "+myList.size()+"  \n角色的模块权限myList = "+myList);
     }
-    //角色B的权限，更新权限
+
+    //测试更新角色的权限（先删除、后更新）
     @Test
     public void test07(){
         //修改一个角色的权限，不仅仅是添加，也可能是减少
-        String roleId="4028a1cd4ee2d9d6014ee2df4c6a0010";
+        String roleId="ac9b2814-51bc-40db-8628-6cb20b77e5e9";
         //String moduleIds="201,202";//减少指定角色的权限
         String moduleIds="201,202,203";//添加角色的权限
         iModuleService.updateRoleModule(roleId,moduleIds);
+    }
+
+   /* @Test
+    public void test08(){
+
+        User user = new User();
+        user.setUserId("0f1f71fe-fe7c-4a44-a952-4f08bf5aa990");
+        //user.setDegree(0);
+        //user.setDegree(1);//企业管理员
+        user.setDegree(4);//普通用户
+        //一个 Module对象 就是左侧栏上的一个菜单项
+        List<Module> menus = iModuleService.findModulesByUser(user);
+        l.info("test08 menus="+menus);
+
     }*/
 }

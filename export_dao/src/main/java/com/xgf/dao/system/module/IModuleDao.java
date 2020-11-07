@@ -19,8 +19,15 @@ public interface IModuleDao {
     //查找以当前模块为父模块的模块数量
     int findParentIdCount(String moduleId);
 
-    /*List<Module> findByRoleId(String roleId);
-
+    //通过角色id查询角色的模块权限
+    List<Module> findByRoleId(String roleId);
+    //删除指定角色的所有模块权限
     void deleteRoleModule(String roleId);
-    void saveRoleModule(String roleId, String mid);*/
+    //给角色添加模块(权限)
+    void saveRoleModule(String roleId, String mid);
+
+/*    //查找belong从属
+    List<Module> findByBelong(String belong);//0平台管理1企业管理
+    //查找用户的id
+    List<Module> findByUserId(String userId);//使用RBAC*/
 }

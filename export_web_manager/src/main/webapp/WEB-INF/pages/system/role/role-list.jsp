@@ -36,10 +36,12 @@
         }
     }
 
+    //查找选中角色的所有权限
     function findModuleByRoleId(){
-        var id = getCheckId();
-        if(id) {
-            location.href="${path}/system/role/toRoleModule?roleId="+id;
+        var roleId = getCheckId();
+        if(roleId) {
+            //去角色模块列表
+            location.href="${path}/system/role/toRoleModule?roleId="+roleId;
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
@@ -78,8 +80,8 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default" title="新建" onclick='location.href="${path}/system/role/toAdd"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
-                            <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                             <button type="button" class="btn btn-default" title="权限" onclick="findModuleByRoleId()"><i class="fa fa-users"></i> 权限</button>
+                            <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                         </div>
                     </div>
                 </div>
