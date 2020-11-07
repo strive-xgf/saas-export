@@ -34,10 +34,11 @@
         }
     }
 
+    //选中用户点击角色的时候，进入用户的角色列表
     function roleList() {
-        var id = getCheckId()
-        if(id) {
-            location.href="/system/user/roleList?id="+id;
+        var userId = getCheckId()
+        if(userId) {
+            location.href="${path}/system/user/toUserRole?userId="+userId;
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }

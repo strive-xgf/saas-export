@@ -1,6 +1,7 @@
 package com.xgf.service.system.role;
 
 import com.github.pagehelper.PageInfo;
+import java.util.List;
 
 import com.xgf.domain.system.role.Role;
 import org.junit.Test;
@@ -64,4 +65,29 @@ public class TestRoleService {
         iRoleService.deleteRole(roleId);
 
     }
+
+//多表
+    //测试查询公司所有的角色、查询用户的角色
+    @Test
+    public void test05(){
+        //user的角色列表
+        String userId="e0de22fe-2c50-4216-ad75-ed0494d2dc92";
+        String companyId="1";
+        //所有的角色
+        List<Role> allList =  iRoleService.findAll(companyId);
+        //查找user自己的角色
+        List<Role> userList =  iRoleService.findRolesByUserId(userId);
+        l.info("test05 公司的所有角色的数量："+ allList.size() +"\tallList = "+allList);
+        l.info("test05 用户的角色的数量： "+ userList.size() +"\tuserList = "+userList);
+    }
+
+    //测试给用户更新角色
+    @Test
+    public void test06(){
+        //老王的角色列表
+        String userId="e0de22fe-2c50-4216-ad75-ed0494d2dc92";
+        String[] roleIds = {"4028a1cd4ee2d9d6014ee2df4c6a0001"};    //总经理角色
+        iRoleService.updateUserRole(userId,roleIds);
+    }
+
 }

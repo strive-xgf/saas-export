@@ -17,6 +17,8 @@ public class Role {
     private String companyId;
     //每条记录 通过companyId,companyName指定所属
     private String companyName;
+    //在角色列表中打上勾，是否选中该角色
+    private boolean checked;
 
     public Role() {
     }
@@ -33,6 +35,14 @@ public class Role {
         this.updateTime = updateTime;
         this.companyId = companyId;
         this.companyName = companyName;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     @Override

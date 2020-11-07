@@ -78,4 +78,5 @@ public class TestUserService {
         List<User> list = iUserService.findAllUsers(companyId);
         l.info("公司的所有userList = "+list);
     }
+
 }

@@ -18,5 +18,5 @@ public interface IUserDao {
     void deleteById(String userId);
 
 
-    User finByEmail(String email);
+    //User finByEmail(String email);
 }
