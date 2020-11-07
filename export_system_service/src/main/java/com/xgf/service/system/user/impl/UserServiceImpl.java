@@ -56,4 +56,11 @@ public class UserServiceImpl implements IUserService {
         iUserDao.update(user);
     }
 
+
+    @Override
+    public User findUserByEmail(String email) {
+        return iUserDao.finByEmail(email);
+    }
+
+
 }

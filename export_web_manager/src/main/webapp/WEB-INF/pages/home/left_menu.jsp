@@ -11,9 +11,9 @@
                 <img src="${path}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <%--登录用户 登录公司 --%>
-                <p> ${sessionScope.user.userName}</p>
-                <a href="#">${sessionScope.user.companyName}</a>
+                <%-- 显示登录用户名，公司名称 --%>
+                <p> ${loginUser.userName}</p>
+                <a href="#">${loginUser.companyName}</a>
             </div>
         </div>
 

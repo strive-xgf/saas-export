@@ -6,8 +6,11 @@
 
   <!-- 设置打开主页为起始页，欢迎页面 -->
   <welcome-file-list>
+    <!-- 登录页设为起始页 -->
+    <welcome-file>login.jsp</welcome-file>
+
     <!-- 访问给定的地址 默认访问index.jsp，可以设置多个，没有就往下找 -->
-    <welcome-file>home/toMain</welcome-file>
+    <!--<welcome-file>home/toMain</welcome-file>-->
   </welcome-file-list>
 <!--
   <welcome-file-list>

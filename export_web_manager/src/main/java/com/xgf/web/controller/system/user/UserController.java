@@ -4,9 +4,11 @@ import com.github.pagehelper.PageInfo;
 
 import com.xgf.domain.msg.Msg;
 import com.xgf.domain.system.dept.Dept;
+import com.xgf.domain.system.module.Module;
 import com.xgf.domain.system.role.Role;
 import com.xgf.domain.system.user.User;
 import com.xgf.service.system.dept.IDeptService;
+import com.xgf.service.system.module.IModuleService;
 import com.xgf.service.system.role.IRoleService;
 import com.xgf.service.system.user.IUserService;
 import com.xgf.web.controller.system.BaseController;
@@ -161,51 +163,48 @@ public class UserController extends BaseController {
         return "redirect:/system/user/toList";
     }
 
-    /*@Autowired
+/*登录功能*/
+    @Autowired
     IModuleService iModuleService;
+
+    //用户登录
     @RequestMapping(path = "/login", method = {RequestMethod.GET, RequestMethod.POST})
-    public String login(String email,String password){
+    public String login(String email,String password){  //email邮箱 和 密码
         //根据 email查询对应的用户
-        l.info("login email "+email);
-        l.info("login password "+password);
+        l.info("用户输入邮箱login email "+email);
+        l.info("用户输入密码login password "+password);
+        //通过email查找user
         User user = iUserService.findUserByEmail(email);
-        l.info("login user "+user);
+        l.info("邮箱对应的用户email user "+user);
         if (user != null) {
-            //1:找到
             //比较账号密码
             if(user.getPassword().equals(password)){
-                //正确
-                l.info("正确");
-                //保存用户信息
+                l.info("密码正确，登录成功");
+                //密码输入正确，将登录的用户保存到session中
                 session.setAttribute("loginUser",user);
-                //一个 Module对象 就是左侧栏上的一个菜单项
-                List<Module> menus = iModuleService.findModulesByUser(user);
-                session.setAttribute("menus",menus);
-                l.info("login menus "+menus);
-                //跳到主页
+
+
+                //登录成功跳转到主页
                 return "redirect:/home/toMain";
             }else{
-                //密码不对
-                l.info("密码不对");
-                request.setAttribute("error","邮箱或者密码不对");
-                return "forward:/login.jsp";
+                l.info("密码错误，请重新输入");
+                request.setAttribute("error","邮箱或者密码不对，请重新输入");
+                return "forward:/login.jsp";    //返回登录页面
             }
         }else{
-            //2:没找到
-            //用户不存在
-            l.info("用户不存在");
-            request.setAttribute("error","用户不存在");
+            l.info("用户不存在（邮箱不存在）");
+            request.setAttribute("error","用户（邮箱）不存在");
             return "forward:/login.jsp";
         }
     }
 
+    //注销登录
     @RequestMapping(path = "/loginOut", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginOut(){
         //删除session中的用户信息
         session.removeAttribute("loginUser");
-        //让session过期
+        //让session过期，销毁session
         session.invalidate();
         return "redirect:/login.jsp";//转发不会改地址的数据，只有重定向会
-    }*/
-
+    }
 }

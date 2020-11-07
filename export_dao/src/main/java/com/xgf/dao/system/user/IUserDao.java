@@ -17,6 +17,6 @@ public interface IUserDao {
     //通过id删除user
     void deleteById(String userId);
 
-
-    //User finByEmail(String email);
+    //登录 - 通过邮箱email查询user
+    User finByEmail(String email);
 }

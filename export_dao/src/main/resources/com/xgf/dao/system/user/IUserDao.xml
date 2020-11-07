@@ -129,6 +129,12 @@
 
     <!-- 通过id删除user -->
     <delete id="deleteById" parameterType="string">
-    delete  from pe_user where user_id = #{userId}
-</delete>
+        delete  from pe_user where user_id = #{userId}
+    </delete>
+
+    <!-- 登录 通过email邮箱查询user -->
+    <select id="finByEmail" parameterType="string" resultMap="userMap">
+        select * from pe_user where email=#{email};
+    </select>
+
 </mapper>

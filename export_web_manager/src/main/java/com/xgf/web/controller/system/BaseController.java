@@ -1,5 +1,6 @@
 package com.xgf.web.controller.system;
 
+import com.xgf.domain.system.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,22 @@ import javax.servlet.http.HttpSession;
 public class BaseController {
     //定义一个可以返回companyId，对部门管理要看公司，这里先设死为1，也就是对id为1的公司的部门进行管理
     public String getLoginCompanyId(){
-        return "1";
+        //从session中获取登录的user
+        User user = (User) session.getAttribute("loginUser");
+        if (user != null) {
+            return user.getCompanyId();
+        } else {
+            return "1";
+        }
     }
     //定义一个可以返回companyName
     public String getLoginCompanyName(){
-        return "吉首大学";
+        User user = (User) session.getAttribute("loginUser");
+        if (user != null) {
+            return user.getCompanyName();
+        } else {
+            return "吉首大学";  //默认值
+        }
     }
 
     //在父类中定义成员变量 request,session,response,并且注入对象

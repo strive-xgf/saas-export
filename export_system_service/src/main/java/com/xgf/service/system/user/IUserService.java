@@ -20,4 +20,7 @@ public interface IUserService {
     boolean deleteUser(String userId);
 
     List<User> findAllUsers(String companyId);
+
+    //登录 - 通过邮箱查找user
+    User findUserByEmail(String email);
 }

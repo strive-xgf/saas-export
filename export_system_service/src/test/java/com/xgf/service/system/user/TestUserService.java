@@ -79,4 +79,24 @@ public class TestUserService {
         l.info("公司的所有userList = "+list);
     }
 
+    //测试用户登录 - 邮箱和密码登录
+    @Test
+    public void test06(){
+        //根据 email查询对应的用户
+        String email = "strive_day@163.com";
+        String password="123456";
+        //通过用户名（邮箱）查询user
+        User user = iUserService.findUserByEmail(email);
+        l.info("test06 登录user "+user);
+        if (user != null) {
+            //比较账号密码
+            if(user.getPassword().equals(password)){
+                l.info("密码正确，登录成功");
+            }else{
+                l.info("密码错误，请重新输入");
+            }
+        }else{
+            l.info("用户不存在（邮箱不存在）");
+        }
+    }
 }
