@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1.配置shiroFilter 认证或授权逻辑处理对象 -->
+    <!--注入：这里的shiroFilter必须和web.xml的filter-name保持一致-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--注入SecurityManager-->
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+    <!--  2.创建SecurityManager（类似service） 权限框架的核心 DefaultWebSecurityManager是一个代理 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--注入Realm（类似dao注入）-->
+        <property name="realm" ref="authRealm"/>
+    </bean>
+
+    <!-- 3.创建Realm（类似dao）,在AuthRealm类上就不需要加@Component注解了 -->
+    <bean id="authRealm" class="com.xgf.web.shiro.AuthRealm"/>
+
+</beans>

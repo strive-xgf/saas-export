@@ -12,7 +12,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
-    
+
 
     <!--springmvc是web层（Controller处理请求）  UserController  @Controller -->
     <!--1.扫描Controller所在包-->
