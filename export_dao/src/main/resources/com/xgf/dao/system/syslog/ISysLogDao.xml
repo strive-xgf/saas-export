@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xgf.dao.system.syslog.ISysLogDao">
+    <!-- 配置日志的映射 表字段和类属性对应 -->
+    <resultMap id="syslogMap" type="sysLog">
+        <id column="id"               property="id"          />
+        <result column="user_name"    property="userName"    />
+        <result column="ip"           property="ip"          />
+        <result column="time"         property="time"        />
+        <result column="method"       property="method"      />
+        <result column="ACTION"       property="action"      />
+        <result column="company_id"   property="companyId"   />
+        <result column="company_name" property="companyName" />
+    </resultMap>
+
+    <!-- 通过公司的id查找所有的日志，按照时间降序显示  -->
+    <select id="findAll" parameterType="string" resultMap="syslogMap">
+        select * from st_sys_log where company_id =#{companyId} order by time desc
+    </select>
+
+    <!-- 新增一条日志记录（用户调用方法，进入controller等都记录日志） -->
+    <insert id="save" parameterType="sysLog">
+    insert into st_sys_log
+        (
+            id            ,
+            user_name     ,
+            ip            ,
+            time          ,
+            method        ,
+            ACTION        ,
+            company_id    ,
+            company_name
+        )
+        values
+        (
+            #{id            },
+            #{userName      },
+            #{ip            },
+            #{time          },
+            #{method        },
+            #{action        },
+            #{companyId     },
+            #{companyName   }
+        )
+    </insert>
+</mapper>
