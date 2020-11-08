@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-            http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd
-            http://www.springframework.org/schema/mvc
-            http://www.springframework.org/schema/mvc/spring-mvc.xsd
-            http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
 
-<!--springmvc是web层（Controller处理请求）  UserController  @Controller -->
+    <!--springmvc是web层（Controller处理请求）  UserController  @Controller -->
     <!--1.扫描Controller所在包-->
     <context:component-scan base-package="com.xgf.web"/>
 
@@ -52,8 +55,12 @@
     <mvc:annotation-driven conversion-service="conversionServiceFactory" />
 
 
+
     <!-- spring-mvc注册我们的统一异常处理类 -->
     <bean id="myExceptionResolver" class="com.xgf.web.exceptions.MyExceptionResolver"/>
+
+    <!--开启AOP切面注解，扫描项目有没有@Aspect注解-->
+    <aop:aspectj-autoproxy/>
 
 </beans>
 

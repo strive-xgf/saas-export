@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../../base.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,7 @@
                             <td>${st.count }</td>
                             <td>${log.userName }</td>
                             <td>${log.ip}</td>
-                            <td>${log.time}</td>
+                            <td><fmt:formatDate value="${log.time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                             <td>${log.action}.${log.method}</td>
                         </tr>
                     </c:forEach>
