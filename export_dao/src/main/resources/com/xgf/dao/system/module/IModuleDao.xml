@@ -145,10 +145,15 @@
      </insert>
      -->
 
-<!--    <select id="findByBelong" parameterType="string" resultMap="moduleMap">
+    <!-- 查找belong从属的模块权限（也就是SaaS管理员和企业管理员的模块权限），只有degree = 0和1的通过这种方式 -->
+    <select id="findByBelong" parameterType="string" resultMap="moduleMap">
         select * from ss_module where belong = #{belong};
     </select>
 
+    <!-- 通过userId使用RBAC查找普通用户的权限（degree!=0和1，非管理员的其他用户权限查找方式）
+            显示内连接查询（不需要查询五张表，只需要三张表就能查询出用户的模块权限）
+            只需要连接3个表就可以查询数据，用户user查询角色包role，角色查模块，就可以获取到用的模块权限
+     -->
     <select id="findByUserId" parameterType="string" resultMap="moduleMap">
             select distinct  m.*
             from
@@ -157,7 +162,7 @@
             inner join ss_module m       on m.module_id=rm.module_id
             where ru.user_id=#{userId}
             order by module_id asc;
-    </select>-->
+    </select>
 
 
 </mapper>

@@ -25,6 +25,7 @@ public interface IModuleService {
     List<Module> findModuleByRoleId(String roleId);
     //通过角色id更新角色的模块信息（zTree树形，先删除该角色的所有模块权限，再添加）
     void updateRoleModule(String roleId, String moduleIds);
-/*    //查找用户的模块权限
-    List<Module> findModulesByUser(User user);*/
+
+    //查找用户的模块权限，显示左侧导航栏
+    List<Module> findModulesByUser(User user);
 }

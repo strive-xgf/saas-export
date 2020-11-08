@@ -12,6 +12,7 @@ import com.xgf.service.system.module.IModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -99,20 +100,20 @@ public class ModuleServiceImpl implements IModuleService {
         }
     }
 
-/*    //查找用户的模块权限信息
+    //查找用户的模块权限信息
     @Override
     public List<Module> findModulesByUser(User user) {
-        //degree ==0 平台管理员 只能看 Sass菜单
-        //degree ==1 企业管理员 只能看 Sass菜单以外
-        //degree ==其他 用户员 根据RBAC表查询
+        //通过degree确定user身份，然后通过对应的belong来查找模块权限（针对degree = 0和1）
+        //degree ==0 平台管理员 只能看 Sass菜单的模块权限（也就是模块belong=0的模块）
+        //degree ==1 企业管理员 只能看 Sass菜单以外的企业模块权限（也就是模块belong=1的所有模块）
+        //degree ==其他 用户 根据RBAC表查询（管理员授予多少模块权限，就显示多少）
         //给一个用户数据到service，service自己判断
-        if (user.getDegree() == 0) {//平台管理员
+        if (user.getDegree() == 0) {//SaaS平台管理员
             return iModuleDao.findByBelong("0");
         } else if (user.getDegree() == 1) {//企业管理员
             return iModuleDao.findByBelong("1");
-        } else {
+        } else {//普通用户
             return iModuleDao.findByUserId(user.getUserId());
         }
-
-    }*/
+    }
 }

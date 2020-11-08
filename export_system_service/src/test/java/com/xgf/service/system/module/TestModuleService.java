@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 
 
 import com.xgf.domain.system.module.Module;
+import com.xgf.domain.system.user.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -90,17 +91,27 @@ public class TestModuleService {
         iModuleService.updateRoleModule(roleId,moduleIds);
     }
 
-   /* @Test
+
+
+    @Test
     public void test08(){
 
-        User user = new User();
-        user.setUserId("0f1f71fe-fe7c-4a44-a952-4f08bf5aa990");
-        //user.setDegree(0);
-        //user.setDegree(1);//企业管理员
-        user.setDegree(4);//普通用户
-        //一个 Module对象 就是左侧栏上的一个菜单项
-        List<Module> menus = iModuleService.findModulesByUser(user);
-        l.info("test08 menus="+menus);
+//        平台管理员 - Sass菜单 degree==0 所属模块belong = 0
+//        企业管理员 -除了Sass菜单之外的所有 degree==1  所属模块 belong=1
+//        用户 通过查RBAC权限，获取权限模块
 
-    }*/
+        //通过user查询用户的模块权限
+        //如果用户的degree = 0或者1 就显示模块中belong对应 = 0或1的模块
+        // 否则就根据RBAC权限表，通过连接表来查询
+        User user = new User();
+        user.setUserId("18077bdb-8dd3-4aae-95a2-078c963f8416");
+        //user.setDegree(0);    //测试SaaS管理员的模块信息
+        //user.setDegree(1);    //测试企业管理员的模块权限
+        //degree!=0或1 也就是非SaaS管理员和企业管理员，具体模块权限要看管理员赋予多少显示多少
+        user.setDegree(4);//普通用户
+        //查询该登录用户user的所有模块的权限，一个 Module对象，就是左侧栏上的一个菜单项
+        List<Module> menus = iModuleService.findModulesByUser(user);
+        l.info("test08 degree = "+ user.getDegree() +"拥有的模块权限数目 = "+ menus.size() +"\nmenus="+menus);
+
+    }
 }

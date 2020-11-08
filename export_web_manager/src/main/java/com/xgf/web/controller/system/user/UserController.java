@@ -183,6 +183,9 @@ public class UserController extends BaseController {
                 //密码输入正确，将登录的用户保存到session中
                 session.setAttribute("loginUser",user);
 
+                //查询用户的模块权限，显示到右侧的导航栏，一个 Module对象 就是左侧栏上的一个菜单项
+                List<Module> menus = iModuleService.findModulesByUser(user);
+                session.setAttribute("menus",menus);
 
                 //登录成功跳转到主页
                 return "redirect:/home/toMain";

@@ -26,8 +26,8 @@ public interface IModuleDao {
     //给角色添加模块(权限)
     void saveRoleModule(String roleId, String mid);
 
-/*    //查找belong从属
-    List<Module> findByBelong(String belong);//0平台管理1企业管理
-    //查找用户的id
-    List<Module> findByUserId(String userId);//使用RBAC*/
+    //查找belong从属的模块权限（也就是SaaS管理员和企业管理员的模块权限），只有degree = 0和1的通过这种方式
+    List<Module> findByBelong(String belong);//0是SaaS平台管理 1是企业管理员
+    //通过userId使用RBAC查找普通用户的权限（degree!=0和1，非管理员的其他用户权限查找方式）
+    List<Module> findByUserId(String userId);
 }
