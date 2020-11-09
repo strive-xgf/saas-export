@@ -4,10 +4,32 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 1.配置shiroFilter 认证或授权逻辑处理对象 -->
-    <!--注入：这里的shiroFilter必须和web.xml的filter-name保持一致-->
+    <!-- 注入：这里的shiroFilter必须和web.xml的filter-name保持一致 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!--注入SecurityManager-->
         <property name="securityManager" ref="securityManager"/>
+
+        <property name="filterChainDefinitions" >
+            <value>
+                <!-- 如果访问静态资源设置为anon过滤器，不要求session中有user，直接可以访问 -->
+                <!--anon可以理解为放行，/**表示拦截所有包括子文件夹-->
+                /css/**=anon
+                /img/**=anon
+                /fonts/**=anon
+                /plugins/**=anon
+                /testjsp/**=anon
+                <!-- 如果通过路径请求login登录方法也放行设置为anon -->
+                <!-- 登录方法拦截的话，永远都登录不进去，登录的表单提交（肯定不能拦截，不然登不进去） -->
+                /system/user/login-shiro=anon  <!-- shiro登录页面表单提交放行 -->
+                /system/user/login=anon  <!-- 登录表单提交放行 -->
+                /login.jsp=anon  <!-- 登录页面放行 -->
+                <!-- 除了以上的，其他任何xxx的controller方法都要拦截，认证和判断权限进行页面跳转
+                    要求登录 authc查询session中是否有user-->
+                /**=authc
+            </value>
+        </property>
+        <!--如果session中没有user，表示未登录，页面转到login-shiro.jsp进行登录 -->
+        <property name="loginUrl" value="/login-shiro.jsp"/>
     </bean>
 
 
