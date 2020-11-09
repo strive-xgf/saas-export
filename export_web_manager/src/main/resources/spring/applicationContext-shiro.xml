@@ -33,13 +33,37 @@
     </bean>
 
 
-    <!--  2.创建SecurityManager（类似service） 权限框架的核心 DefaultWebSecurityManager是一个代理 -->
+    <!--  2.1 创建SecurityManager（类似service） 权限框架的核心 DefaultWebSecurityManager是一个代理 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--注入Realm（类似dao注入）-->
         <property name="realm" ref="authRealm"/>
     </bean>
 
+    <!-- 配置一个密码的匹配器（使用自定义的了，这个不使用了） -->
+    <!--  123456 是用户提交过来的密码明文， 密码的匹配器，得到密文，与数据库的密码 -->
+    <!--创建凭证匹配器-->
+    <bean id="credentialsMatcher1" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <!--指定加密算法-->
+        <property name="hashAlgorithmName" value="md5"/>
+    </bean>
+
+    <!--使用自己定义的匹配器-->
+    <bean id="credentialsMatcher2" class="com.xgf.web.utils.CustomCredentialsMatcher"></bean>
+
     <!-- 3.创建Realm（类似dao）,在AuthRealm类上就不需要加@Component注解了 -->
-    <bean id="authRealm" class="com.xgf.web.shiro.AuthRealm"/>
+    <bean id="authRealm" class="com.xgf.web.shiro.AuthRealm">
+        <!-- 使用自定义匹配器（密码） -->
+        <property name="credentialsMatcher" ref="credentialsMatcher2"/>
+    </bean>
+
+
+    <!-- @RequiredPermission-->
+    <bean id="lifecycleBeanPostProcessor"
+          class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
 </beans>

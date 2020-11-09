@@ -38,7 +38,9 @@ public class TestUserService {
     @Test
     public void test02(){
         User user = new User();
-        user.setUserName("新增用户addUser");
+        user.setUserName("add");
+        user.setEmail("add@163.com");
+        user.setPassword("123456");
         user.setDeptId(UUID.randomUUID().toString());
         user.setDeptId("1");
         user.setCompanyId("1");
