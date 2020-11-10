@@ -31,7 +31,7 @@
                     然后将模块权限的名称添加到shiro中
                     【注意】权限校验要配置在 /**=authc 的前面
                  -->
-                /company/toList=perms["企业管理"]
+                <!--/company/toList=perms["企业管理"]-->
 
                 /**=authc
             </value>
@@ -68,7 +68,10 @@
     </bean>
 
 
-    <!-- @RequiredPermission-->
+
+
+
+    <!-- 权限校验的注解方式配置@RequiredPermission  -->
     <bean id="lifecycleBeanPostProcessor"
           class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"

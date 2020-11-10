@@ -4,6 +4,7 @@ package com.xgf.web.controller.company;
 import com.github.pagehelper.PageInfo;
 import com.xgf.domain.company.Company;
 import com.xgf.service.company.ICompanyService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
+//注解方式实现权限校验
 @Controller
 @RequestMapping("/company")
 public class CompanyController {
@@ -22,6 +24,7 @@ public class CompanyController {
     ICompanyService companyService;
 
     //去company的所有公司信息页面 分页显示
+    @RequiresPermissions("企业管理")    //当前用户需要有【企业管理】权限才能访问包含的内容
     @RequestMapping(path="/toList",method = {RequestMethod.GET,RequestMethod.POST})
     public String toList( Integer curr, Integer pageSize, Model model){
         //调service获取数据
@@ -49,7 +52,7 @@ public class CompanyController {
     }
 
     //${path}/company/toEdit?id=${item.id}
-
+    @RequiresPermissions("企业管理")    //当前用户需要有【企业管理】权限才能访问包含的内容
     @RequestMapping(path="/toEdit",method = RequestMethod.GET)
     public String toEdit(String id,Model model){
         l.info("toEdit id="+id);

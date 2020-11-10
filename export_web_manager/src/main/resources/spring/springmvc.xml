@@ -59,7 +59,9 @@
     <!-- spring-mvc注册我们的统一异常处理类 -->
     <bean id="myExceptionResolver" class="com.xgf.web.exceptions.MyExceptionResolver"/>
 
-    <!--开启AOP切面注解，扫描项目有没有@Aspect注解-->
+    <!--开启AOP切面注解，扫描项目有没有@Aspect注解
+        权限校验的注解方式也要开启AOP注解
+     -->
     <aop:aspectj-autoproxy/>
 
 </beans>
