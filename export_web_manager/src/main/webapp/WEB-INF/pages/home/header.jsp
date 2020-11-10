@@ -245,7 +245,10 @@
                                 <a href="#" class="btn btn-default btn-flat">修改密码</a>
                             </div>
                             <div class="pull-right">
-                                <a href="${path}/system/user/loginOut" class="btn btn-default btn-flat">注销</a>
+                                <%-- 非加密方式注销 --%>
+                                <%--<a href="${path}/system/user/loginOut" class="btn btn-default btn-flat">注销</a>--%>
+                                <%--使用shiro退出 subject.logout(); --%>
+                                <a href="${path}/system/user/loginOut-shiro" class="btn btn-default btn-flat">注销</a>
                             </div>
                         </li>
                     </ul>

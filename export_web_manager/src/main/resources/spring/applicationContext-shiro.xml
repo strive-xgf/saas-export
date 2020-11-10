@@ -25,11 +25,22 @@
                 /login.jsp=anon  <!-- 登录页面放行 -->
                 <!-- 除了以上的，其他任何xxx的controller方法都要拦截，认证和判断权限进行页面跳转
                     要求登录 authc查询session中是否有user-->
+
+                <!-- 权限校验的第二种方式配置过滤器 去/company/toList的话必须要有企业管理的权限
+                    这个企业管理，是我们自定义的AuthRealm的授权doGetAuthorizationInfo方法中查询用户的权限
+                    然后将模块权限的名称添加到shiro中
+                    【注意】权限校验要配置在 /**=authc 的前面
+                 -->
+                /company/toList=perms["企业管理"]
+
                 /**=authc
             </value>
         </property>
         <!--如果session中没有user，表示未登录，页面转到login-shiro.jsp进行登录 -->
         <property name="loginUrl" value="/login-shiro.jsp"/>
+
+        <!-- unauthorizedUrl配置用户访问url没有权限时，跳转非授权页面 -->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
     </bean>
 
 

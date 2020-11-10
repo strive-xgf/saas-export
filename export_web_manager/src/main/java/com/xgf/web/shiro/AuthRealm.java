@@ -45,14 +45,16 @@ public class AuthRealm extends AuthorizingRealm {
         if(user != null){
             //查询当前账号email用户名包含哪些权限(中文表示)
             List<Module> list = iModuleService.findModulesByUser(user);
-            SimpleAuthorizationInfo info =new SimpleAuthorizationInfo();
+            SimpleAuthorizationInfo authInfo =new SimpleAuthorizationInfo();
             //循环，用中文显示getName()
             for(Module m:list){
                 l.info("doGetAuthorizationInfo m "+m.getName());
                 //将字符串表示的权限名称添加到shiro
-                info.addStringPermission(m.getName());
+                authInfo.addStringPermission(m.getName());
+                //访问资源时候，进行授权校验，用访问资源需要的权限去用户权限列表查找，如果存在，则有权限访问资源。
+                //（不存在权限就权限拦截，跳到提示页面）
             }//end for
-            return info;
+            return authInfo;
         }//end if
         return null;
     }

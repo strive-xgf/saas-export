@@ -265,10 +265,12 @@ public class UserController extends BaseController {
     }
 
 
+    //使用shiro退出登录（不再使用前面的普通登录退出了）
     @RequestMapping(path = "/loginOut-shiro", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginOutShiro(){
         //删除session中的用户信息
         Subject subject = SecurityUtils.getSubject();
+        //shiro退出登录
         subject.logout();
         l.info("loginOut-shiro注销用户");
         return "redirect:/login-shiro.jsp";
