@@ -24,7 +24,7 @@ public class CompanyController {
     ICompanyService companyService;
 
     //去company的所有公司信息页面 分页显示
-    @RequiresPermissions("企业管理")    //当前用户需要有【企业管理】权限才能访问包含的内容
+    //@RequiresPermissions("企业管理")    //当前用户需要有【企业管理】权限才能访问包含的内容
     @RequestMapping(path="/toList",method = {RequestMethod.GET,RequestMethod.POST})
     public String toList( Integer curr, Integer pageSize, Model model){
         //调service获取数据
